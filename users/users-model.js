@@ -16,6 +16,6 @@ function getAllUsers() {
 
 function findBy(filter) {
   return db('users')
-    .select('id', 'username')
+    .select('password', 'username')
     .where(filter);
 }
