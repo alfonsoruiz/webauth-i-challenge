@@ -1,8 +1,16 @@
 const express = require('express');
+const restricted = require('../auth/restricted-middleware');
 const router = express.Router();
 const Users = require('./users-model');
 
-router.get('/', (req, res) => {
+/******************* Authorization ********************
+  - If Route needs to be protected the following is necessary
+  - req.headers should have a correct username/password
+  - req.headers.username, req.headers.password
+  - If incorrect block user
+*/
+
+router.get('/', restricted, (req, res) => {
   Users.getAllUsers()
     .then(users => {
       res.status(200).json(users);
