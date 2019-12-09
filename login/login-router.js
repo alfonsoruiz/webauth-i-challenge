@@ -10,7 +10,8 @@ router.post('/', (req, res) => {
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        res.status(200).json({ message: `Welcome ${user.username}!` });
+        req.session.user = user; // attaches a user to the session upon successful login
+        res.status(200).json({ message: `Logged In` });
       } else {
         res.status(401).json({ message: 'Invalid Credentials' });
       }

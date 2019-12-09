@@ -10,6 +10,7 @@ const Users = require('./users-model');
   - If incorrect block user
 */
 
+// Upon get request to this end point runs restricted middleware to authenticate user before sending resonposnes back to the client
 router.get('/', restricted, (req, res) => {
   Users.getAllUsers()
     .then(users => {
